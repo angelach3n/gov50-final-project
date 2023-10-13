@@ -7,8 +7,16 @@ output:
     self_contained: false
 ---
 
+## Proposal
 
+What personal factor has the largest impact on employee attrition at a company? In this study, I plan to examine the correlation between employee attrition and 3 personal factors: work life balance, environmental satisfaction, and relationship satisfaction. 
 
-## Project thoughts
+I hypothesize that work life balance will have the largest impact on employee attrition. There has been a large increase in remote work, initially due to the pandemic but continuing due to employee preference. Within a recent 2023 survey done by Forbes, 71% of remote workers said remote work as it helps balance their work and personal life. Additionally, remote workers said that flexible hours are the top benefit of working remotely, which would allow them to balance their life and working hours better. 
+https://www.forbes.com/advisor/business/remote-work-statistics/
 
-I am interested in exploring data related to environmental science and public policy. I want to examine the effect of specific laws on people, and especially look into the impact of environmental legislation. 
+My sample is a data set by IBM data scientists of 1470 employees and 35 attributes about them. The first explanatory variable of interest is work life balance, which is measured on a 1-4 scale, with 1 indicating ’Bad', 2 indicating 'Good', 3 indicating 'Better', and 4 indicating 'Best'. The second explanatory variable is environmental satisfaction, which is measured on a 1-4 scale, with 1 indicating 'Low', 2 indicating 'Medium', 3 indicating 'High', and 4 indicating 'Very High'. The third explanatory variable is relationship satisfaction, which is measured on a 1-4 scale, with 1 indicating 'Low', 2 indicating 'Medium', 3 indicating 'High', 4 indicating 'Very High'. 
+
+My outcome variable is the attrition of the employees, which signifies whether or not an employee left their organizations for unpredictable or uncontrollable reasons. It is measured as a “Yes” if the employee attrited, and a “No” if the employee did not leave. I am planning on altering this measurement to equal 1 for “Yes” and 0 for “No” so I can work with numerical measurements. 
+
+If employee attrition is most correlated with high work life balance results, then this would provide support for my hypothesis. If, on the other hand, I observe that employee attrition to be more correlated with high values of environment satisfaction and/or relationship satisfaction instead, then this would provide evidence against my hypothesis. I am planning on running linear regression models on my values. 
+
