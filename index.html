@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["Dataset/archive.zip","Dataset/HR Employee Attrition.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1517,8 +1517,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
-<p>I am interested in exploring data related to environmental science and public policy. I want to examine the effect of specific laws on people, and especially look into the impact of environmental legislation.</p>
+<h2 id="proposal">Proposal</h2>
+<p>What personal factor has the largest impact on employee attrition at a company? In this study, I plan to examine the correlation between employee attrition and 3 personal factors: work life balance, environmental satisfaction, and relationship satisfaction.</p>
+<p>I hypothesize that work life balance will have the largest impact on employee attrition. There has been a large increase in remote work, initially due to the pandemic but continuing due to employee preference. Within a recent 2023 survey done by Forbes, 71% of remote workers said remote work as it helps balance their work and personal life. Additionally, remote workers said that flexible hours are the top benefit of working remotely, which would allow them to balance their life and working hours better.
+<a href="https://www.forbes.com/advisor/business/remote-work-statistics/" class="uri">https://www.forbes.com/advisor/business/remote-work-statistics/</a></p>
+<p>My sample is a data set by IBM data scientists of 1470 employees and 35 attributes about them. The first explanatory variable of interest is work life balance, which is measured on a 1-4 scale, with 1 indicating ’Bad’, 2 indicating ‘Good’, 3 indicating ‘Better’, and 4 indicating ‘Best’. The second explanatory variable is environmental satisfaction, which is measured on a 1-4 scale, with 1 indicating ‘Low’, 2 indicating ‘Medium’, 3 indicating ‘High’, and 4 indicating ‘Very High’. The third explanatory variable is relationship satisfaction, which is measured on a 1-4 scale, with 1 indicating ‘Low’, 2 indicating ‘Medium’, 3 indicating ‘High’, 4 indicating ‘Very High’.</p>
+<p>My outcome variable is the attrition of the employees, which signifies whether or not an employee left their organizations for unpredictable or uncontrollable reasons. It is measured as a “Yes” if the employee attrited, and a “No” if the employee did not leave. I am planning on altering this measurement to equal 1 for “Yes” and 0 for “No” so I can work with numerical measurements.</p>
+<p>If employee attrition is most correlated with high work life balance results, then this would provide support for my hypothesis. If, on the other hand, I observe that employee attrition to be more correlated with high values of environment satisfaction and/or relationship satisfaction instead, then this would provide evidence against my hypothesis. I am planning on running linear regression models on my values.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
