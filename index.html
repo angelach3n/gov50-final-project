@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["Dataset/archive.zip","Dataset/HR Employee Attrition.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/ds_salaries.csv","data/web_dev.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1518,13 +1518,85 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <h2 id="proposal">Proposal</h2>
-<p>What personal factor has the largest impact on employee attrition at a company? In this study, I plan to examine the correlation between employee attrition and 3 personal factors: work life balance, environmental satisfaction, and relationship satisfaction.</p>
-<p>I hypothesize that work life balance will have the largest impact on employee attrition. There has been a large increase in remote work, initially due to the pandemic but continuing due to employee preference. Within a recent 2023 survey done by Forbes, 71% of remote workers said remote work as it helps balance their work and personal life. Additionally, remote workers said that flexible hours are the top benefit of working remotely, which would allow them to balance their life and working hours better.
-<a href="https://www.forbes.com/advisor/business/remote-work-statistics/" class="uri">https://www.forbes.com/advisor/business/remote-work-statistics/</a></p>
-<p>My sample is a data set by IBM data scientists of 1470 employees and 35 attributes about them. The first explanatory variable of interest is work life balance, which is measured on a 1-4 scale, with 1 indicating ’Bad’, 2 indicating ‘Good’, 3 indicating ‘Better’, and 4 indicating ‘Best’. The second explanatory variable is environmental satisfaction, which is measured on a 1-4 scale, with 1 indicating ‘Low’, 2 indicating ‘Medium’, 3 indicating ‘High’, and 4 indicating ‘Very High’. The third explanatory variable is relationship satisfaction, which is measured on a 1-4 scale, with 1 indicating ‘Low’, 2 indicating ‘Medium’, 3 indicating ‘High’, 4 indicating ‘Very High’.</p>
-<p>My outcome variable is the attrition of the employees, which signifies whether or not an employee left their organizations for unpredictable or uncontrollable reasons. It is measured as a “Yes” if the employee attrited, and a “No” if the employee did not leave. I am planning on altering this measurement to equal 1 for “Yes” and 0 for “No” so I can work with numerical measurements.</p>
-<p>If employee attrition is most correlated with high work life balance results, then this would provide support for my hypothesis. If, on the other hand, I observe that employee attrition to be more correlated with high values of environment satisfaction and/or relationship satisfaction instead, then this would provide evidence against my hypothesis. I am planning on running linear regression models on my values.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Does the rating of a company on glassdoor have a positive correlation with the maximum salary they offer for their web development role? In this study, I plan to examine whether a higher rating of a company typically indicates that the company pays a higher maximum salary for their web development role.</p>
+<p>I hypothesize that a higher company rating does positively correlate with higher maximum salary given for web developers. Glassdoor is a website where current and former employees can anonymously review companies. Therefore, companies that are rated higher typically have better resources, working conditions, treatment of employees, etc… Not only do employees tend to rate companies higher if they were paid better there, but also companies with better resources (and hence better ratings), typically pay a higher salary.</p>
+<p>My sample consists of 900 companies total, with 612 companies having complete data on their glassdoor rating and their maximum and minimum salary for a web developer. This data was found through web scraping from glassdoor. The explanatory interest is the rating of the company on glassdoor, which is found in 0.1 increments from 1 to 5. My outcome variable of interest is the maximum salary the company has listed for its web development role in USD.</p>
+<p>If the company rating is positively correlated with the maximum salary offered, then this would provide support for my hypothesis. If, on the other hand, I observe that a company’s rating has a negative impact or no impact on its maximum salary offered, then this would provide evidence against my hypothesis. Beyond examining company rating effects on maximum salary for a web developer, I hope to also examine its effects on the minimum salary offered.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>salary_rating</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/web_dev.csv"</span><span class='op'>)</span></span>
+<span><span class='va'>salary_rating</span></span></code></pre>
+</div>
+<pre><code># A tibble: 900 × 11
+    ...1            id job_title      job_role job_location easy_apply
+   &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;        &lt;lgl&gt;     
+ 1     1 1008079793339 Software Deve… Web App… Wilton, CT   TRUE      
+ 2     2 1007607350396 Software Deve… Softwar… Remote       TRUE      
+ 3     3 1008062785194 Software Deve… Softwar… Lexington, … TRUE      
+ 4     4 1007190807289 Software Deve… Full St… Albany, NY   TRUE      
+ 5     5 1007961472868 Software Deve… Full St… Kernersvill… TRUE      
+ 6     6 1007923843916 Software Deve… Full St… Duluth, GA   TRUE      
+ 7     7 1008062673549 Software Deve… PHP Ful… Oklahoma Ci… TRUE      
+ 8     8 1008086199196 Software Deve… Web Des… Omaha, NE    TRUE      
+ 9     9 1008091512712 Software Deve… Senior … Remote       TRUE      
+10    10 1008078902333 Software Deve… Web App… Columbia, MO TRUE      
+# ℹ 890 more rows
+# ℹ 5 more variables: company_name &lt;chr&gt;, salary &lt;chr&gt;,
+#   company_rating &lt;dbl&gt;, min_salary &lt;dbl&gt;, max_salary &lt;dbl&gt;</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>salary_rating</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>salary_rating</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>salary_rating</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>company_rating</span>, <span class='va'>max_salary</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code># A tibble: 612 × 2
+   company_rating max_salary
+            &lt;dbl&gt;      &lt;dbl&gt;
+ 1            4.5     125000
+ 2            4        81472
+ 3            4       120000
+ 4            3.7     120000
+ 5            3.9     120000
+ 6            4.3      78000
+ 7            4.1      93230
+ 8            4.1      84224
+ 9            1.8      83992
+10            4.6      65000
+# ℹ 602 more rows</code></pre>
+</div>
+<p>I removed all the rows that contained missing values as most of those missing values were found in the column on company_rating.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>salary_rating</span>,</span>
+<span>       mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>max_salary</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Maximum Salary for Web Developer"</span>, </span>
+<span>       y <span class='op'>=</span> <span class='st'>"Count"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>salary_rating</span>,</span>
+<span>       mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>company_rating</span>,</span>
+<span>                     y <span class='op'>=</span> <span class='va'>max_salary</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Company Rating"</span>, </span>
+<span>       y <span class='op'>=</span> <span class='st'>"Maximum Salary"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
+<p>From this scatterplot and the smooth line, we see that there is a slightly negative correlation between the rating of a company on Glassdoor and the maximum salary that they pay for their standard web development job.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

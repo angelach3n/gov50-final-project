@@ -9,14 +9,48 @@ output:
 
 ## Proposal
 
-What personal factor has the largest impact on employee attrition at a company? In this study, I plan to examine the correlation between employee attrition and 3 personal factors: work life balance, environmental satisfaction, and relationship satisfaction. 
+Does the rating of a company on glassdoor have a positive correlation with the maximum salary they offer for their web development role? In this study, I plan to examine whether a higher rating of a company typically indicates that the company pays a higher maximum salary for their web development role. 
 
-I hypothesize that work life balance will have the largest impact on employee attrition. There has been a large increase in remote work, initially due to the pandemic but continuing due to employee preference. Within a recent 2023 survey done by Forbes, 71% of remote workers said remote work as it helps balance their work and personal life. Additionally, remote workers said that flexible hours are the top benefit of working remotely, which would allow them to balance their life and working hours better. 
-https://www.forbes.com/advisor/business/remote-work-statistics/
+I hypothesize that a higher company rating does positively correlate with higher maximum salary given for web developers. Glassdoor is a website where current and former employees can anonymously review companies. Therefore, companies that are rated higher typically have better resources,  working conditions, treatment of employees, etc… Not only do employees tend to rate companies higher if they were paid better there, but also companies with better resources (and hence better ratings), typically pay a higher salary. 
 
-My sample is a data set by IBM data scientists of 1470 employees and 35 attributes about them. The first explanatory variable of interest is work life balance, which is measured on a 1-4 scale, with 1 indicating ’Bad', 2 indicating 'Good', 3 indicating 'Better', and 4 indicating 'Best'. The second explanatory variable is environmental satisfaction, which is measured on a 1-4 scale, with 1 indicating 'Low', 2 indicating 'Medium', 3 indicating 'High', and 4 indicating 'Very High'. The third explanatory variable is relationship satisfaction, which is measured on a 1-4 scale, with 1 indicating 'Low', 2 indicating 'Medium', 3 indicating 'High', 4 indicating 'Very High'. 
+My sample consists of 900 companies total, with 612 companies having complete data on their glassdoor rating and their maximum and minimum salary for a web developer. This data was found through web scraping from glassdoor. The explanatory interest is the rating of the company on glassdoor, which is found in 0.1 increments from 1 to 5. My outcome variable of interest is the maximum salary the company has listed for its web development role in USD. 
 
-My outcome variable is the attrition of the employees, which signifies whether or not an employee left their organizations for unpredictable or uncontrollable reasons. It is measured as a “Yes” if the employee attrited, and a “No” if the employee did not leave. I am planning on altering this measurement to equal 1 for “Yes” and 0 for “No” so I can work with numerical measurements. 
+If the company rating is positively correlated with the maximum salary offered, then this would provide support for my hypothesis. If, on the other hand, I observe that a company’s rating has a negative impact or no impact on its maximum salary offered, then this would provide evidence against my hypothesis. Beyond examining company rating effects on maximum salary for a web developer, I hope to also examine its effects on the minimum salary offered. 
 
-If employee attrition is most correlated with high work life balance results, then this would provide support for my hypothesis. If, on the other hand, I observe that employee attrition to be more correlated with high values of environment satisfaction and/or relationship satisfaction instead, then this would provide evidence against my hypothesis. I am planning on running linear regression models on my values. 
 
+```{r}
+library(tidyverse)
+library(dplyr)
+library(broom)
+```
+
+```{r}
+salary_rating <- read_csv("data/web_dev.csv")
+salary_rating
+```
+```{r}
+salary_rating <- na.omit(salary_rating)
+
+salary_rating |> 
+  select(company_rating, max_salary)
+```
+I removed all the rows that contained missing values as most of those missing values were found in the column on company_rating. 
+
+```{r}
+ggplot(data = salary_rating,
+       mapping = aes(x = max_salary)) +
+  geom_histogram() + 
+  labs(x = "Maximum Salary for Web Developer", 
+       y = "Count")
+```
+```{r}
+ggplot(data = salary_rating,
+       mapping = aes(x = company_rating,
+                     y = max_salary)) +
+  geom_point() + geom_smooth() + 
+  labs(x = "Company Rating", 
+       y = "Maximum Salary")
+```
+
+
+From this scatterplot and the smooth line, we see that there is a slightly negative correlation between the rating of a company on Glassdoor and the maximum salary that they pay for their standard web development job. 
