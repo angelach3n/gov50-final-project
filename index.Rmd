@@ -36,7 +36,7 @@ salary_rating
 ```{r}
 webdev_salary <- salary_rating |> 
   ggplot(mapping = aes(x = max_salary)) +
-  geom_histogram(color="lightcoral") + 
+  geom_histogram(color="coral2") + 
   labs(title = "Distribution of Maxium Salary of Software Developers in 612 Companies" , 
        x = "Maximum Salary for Software Developer", 
        y = "Count")
@@ -51,7 +51,7 @@ The majority of maximum salaries across the 612 companies appears to fall betwee
 maxsalary_plot <- salary_rating |> 
   ggplot(mapping = aes(x = company_rating,
                      y = max_salary)) +
-  geom_point(color = "lightcoral", alpha = 0.8) + geom_smooth(method = "lm") + 
+  geom_point(color = "coral2", alpha = 0.8) + geom_smooth(method = "lm") + 
   labs(title = "Relationship Between Company Rating and Maximum Salary", 
        x = "Company Rating", 
        y = "Maximum Salary for Software Developer")
