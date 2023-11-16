@@ -7,50 +7,75 @@ output:
     self_contained: false
 ---
 
-## Proposal
+## Introduction
 
-Does the rating of a company on glassdoor have a positive correlation with the maximum salary they offer for their web development role? In this study, I plan to examine whether a higher rating of a company typically indicates that the company pays a higher maximum salary for their web development role. 
+Does the rating of a company on glassdoor have a positive correlation with the maximum salary they offer for their web development role? In this study, I plan to examine whether a higher rating of a company typically indicates that the company pays a higher maximum salary for their web development role. I hypothesize that a higher company rating does positively correlate with higher maximum salary for web developers. Glassdoor is a website where current and former employees can anonymously review companies. Not only do employees tend to rate companies higher if they were paid better there, but companies that are rated higher may have better resources and can therefore afford to pay a higher salary. 
 
-I hypothesize that a higher company rating does positively correlate with higher maximum salary given for web developers. Glassdoor is a website where current and former employees can anonymously review companies. Therefore, companies that are rated higher typically have better resources,  working conditions, treatment of employees, etc… Not only do employees tend to rate companies higher if they were paid better there, but also companies with better resources (and hence better ratings), typically pay a higher salary. 
+My sample consists of data on 900 companies total regarding rating on Glassdoor, job location, maximum and minimum salary for software developers, and more. The explanatory interest is the rating of the company on Glassdoor, which is found in 0.1 increments from 1 to 5. My outcome variable of interest is the maximum salary the company has listed for its software development role in USD. If the company rating is positively correlated with the maximum salary offered, then this would provide support for my hypothesis. Beyond examining company rating effects on maximum salary for a software developer, I hope to also examine its effects on the minimum salary offered. 
+ 
+## Data and Preliminary Analysis
 
-My sample consists of 900 companies total, with 612 companies having complete data on their glassdoor rating and their maximum and minimum salary for a web developer. This data was found through web scraping from glassdoor. The explanatory interest is the rating of the company on glassdoor, which is found in 0.1 increments from 1 to 5. My outcome variable of interest is the maximum salary the company has listed for its web development role in USD. 
-
-If the company rating is positively correlated with the maximum salary offered, then this would provide support for my hypothesis. If, on the other hand, I observe that a company’s rating has a negative impact or no impact on its maximum salary offered, then this would provide evidence against my hypothesis. Beyond examining company rating effects on maximum salary for a web developer, I hope to also examine its effects on the minimum salary offered. 
-
+My data is taken from web scraping off Glassdoor. Off the 900 companies in the dataset, there are 612 companies that have complete data on their Glassdoor rating and their maximum and minimum salary for a software developer. Companies with missing values were removed. 
 
 ```{r}
 library(tidyverse)
 library(dplyr)
 library(broom)
 ```
-
 ```{r}
 salary_rating <- read_csv("data/web_dev.csv")
 salary_rating
 ```
 ```{r}
 salary_rating <- na.omit(salary_rating)
-
-salary_rating |> 
-  select(company_rating, max_salary)
+salary_rating
 ```
-I removed all the rows that contained missing values as most of those missing values were found in the column on company_rating. 
+
+## Histogram
 
 ```{r}
-ggplot(data = salary_rating,
-       mapping = aes(x = max_salary)) +
-  geom_histogram() + 
-  labs(x = "Maximum Salary for Web Developer", 
+webdev_salary <- salary_rating |> 
+  ggplot(mapping = aes(x = max_salary)) +
+  geom_histogram(color="lightcoral") + 
+  labs(title = "Distribution of Maxium Salary of Software Developers in 612 Companies" , 
+       x = "Maximum Salary for Software Developer", 
        y = "Count")
+
+webdev_salary + theme_bw()
 ```
+The majority of maximum salaries across the 612 companies appears to fall between *75,000 USD to 125,000 USD*. 
+
+# Results 
+## Scatterplot Visualization of Maximum Salary
 ```{r}
-ggplot(data = salary_rating,
-       mapping = aes(x = company_rating,
+maxsalary_plot <- salary_rating |> 
+  ggplot(mapping = aes(x = company_rating,
                      y = max_salary)) +
-  geom_point() + geom_smooth() + 
-  labs(x = "Company Rating", 
-       y = "Maximum Salary")
+  geom_point(color = "lightcoral", alpha = 0.8) + geom_smooth(method = "lm") + 
+  labs(title = "Relationship Between Company Rating and Maximum Salary", 
+       x = "Company Rating", 
+       y = "Maximum Salary for Software Developer")
+
+maxsalary_plot + theme_bw()
 ```
 
+From this scatterplot and the smooth line, we see that there is a slightly **negative correlation** between the rating of a company on Glassdoor and the maximum salary that they pay for their standard web development job. Thus, having a higher company rating tends to correlate with companies having a lower maximum salary, **disproving my hypothesis**. 
 
-From this scatterplot and the smooth line, we see that there is a slightly negative correlation between the rating of a company on Glassdoor and the maximum salary that they pay for their standard web development job. 
+A reason for this could be because larger, well-known companies tend to have higher ratings, and due to their well-establish name they do not need to offer high salaries to retain employees. In addition, companies may receive higher ratings because they provide better benefits, resources, and/or support for their employees. Therefore, much of the monetary cost per employee goes into these benefits, and thus could be deducted from the salary. 
+
+
+## Scatterplot Visualization of Minimum Salary
+```{r}
+minsalary_plot <- salary_rating |> 
+  ggplot(mapping = aes(x = company_rating,
+                     y = min_salary)) +
+  geom_point(color = "green4", alpha = 0.8) + geom_smooth(method = "lm") + 
+  labs(title = "Relationship Between Company Rating and Minimum Salary", 
+       x = "Company Rating", 
+       y = "Minimum Salary for Software Developer")
+
+minsalary_plot + theme_bw()
+```
+Out of curiosity, I also examined the relationship between the company rating and the minimum salary for software developer. Although the linear line has a slightly negative slope, it is **almost horizontal**. Therefore, the rating of a company on Glassdoor has almost no impact on the minimum salary. Note that this means that company rating has more of a impact on the maximum salary of a software developer than the minimum salary. 
+
+The reason for this could that there exists a standard minimum salary for software developers that companies try to meet regardless of other factors. Additionally, companies are unrestricted in how high the salaries they pay can go, but they cannot offer salaries too low as it is unethical and would hurt their reputation. Having a minimum salary that is lower than a potential set standard could also drive away potential employees, which incentivizes companies to price their minimum salary at a standard range regardless of their rating. 
