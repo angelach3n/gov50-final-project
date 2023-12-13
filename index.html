@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/ds_salaries.csv","data/web_dev.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/ds_salaries.csv","data/web_dev.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1518,112 +1518,1623 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <h2 id="introduction">Introduction</h2>
-<p>Does the rating of a company on glassdoor have a positive correlation with the maximum salary they offer for their web development role? In this study, I plan to examine whether a higher rating of a company typically indicates that the company pays a higher maximum salary for their web development role. I hypothesize that a higher company rating does positively correlate with higher maximum salary for web developers. Glassdoor is a website where current and former employees can anonymously review companies. Not only do employees tend to rate companies higher if they were paid better there, but companies that are rated higher may have better resources and can therefore afford to pay a higher salary.</p>
-<p>My sample consists of data on 900 companies total regarding rating on Glassdoor, job location, maximum and minimum salary for software developers, and more. The explanatory interest is the rating of the company on Glassdoor, which is found in 0.1 increments from 1 to 5. My outcome variable of interest is the maximum salary the company has listed for its software development role in USD. If the company rating is positively correlated with the maximum salary offered, then this would provide support for my hypothesis. Beyond examining company rating effects on maximum salary for a software developer, I hope to also examine its effects on the minimum salary offered.</p>
+<p>Does the rating of a company on Glassdoor have a positive correlation with the maximum salary they offer for their software development role? In this study, I plan to examine whether a higher rating of a company typically indicates that the company pays a higher maximum salary for their web development role.</p>
+<p>I hypothesize that a higher company rating does positively correlate with higher maximum salary for software developers. Glassdoor is a job and recruiting website where current and former employees can anonymously review companies. Not only do employees tend to rate companies higher if they were paid better there, but companies that are rated higher may have better resources and can therefore afford to pay a higher salary. If the company rating is positively correlated with the maximum salary offered, then this would provide support for my hypothesis. Beyond examining company rating effects on maximum salary for a software developer, I hope to also examine its effects on the minimum salary offered.</p>
+<p>This study addresses critical aspects of job market transparency, salary negotiation, and employer competitiveness. The results can aid decision-making for job seekers, who often use platforms like Glassdoor, to determine information about potential employers. This is especially useful in the technology-field as it is highly competitive and employees often move between companies rapidly. Knowing the potential relationship between Glassdoor ratings and maximum salary allows for more transparent information about compensation and benefits for employees. There are also implications on employers to see the general trend for payment based on rating. This study also hints at the importance of compensation on employee engagement and satisfaction, which can potentially impact company policies, recruitment strategies, and overall workplace satisfaction. For example, if my hypothesis is proven wrong, then companies may consider that other factors and benefits are needed other than compensation to uphold a good company reputation and employee happiness.</p>
 <h2 id="data-and-preliminary-analysis">Data and Preliminary Analysis</h2>
-<p>My data is taken from web scraping off Glassdoor. Off the 900 companies in the dataset, there are 612 companies that have complete data on their Glassdoor rating and their maximum and minimum salary for a software developer. Companies with missing values were removed.</p>
+<p>My data is taken from web scraping off of Glassdoor of 900 companies and their software/web developer roles, with variables such as job title, job location, company rating, whether it is easy to apply on Glassdoor or not, the maximum salary, the minimum salary, and more. Of the 900 companies in the dataset, there are 612 companies that have complete data on their Glassdoor rating and their maximum and minimum salary for a software developer. Companies with missing values were removed.</p>
+<p>The research design is a <strong>cross-sectional study</strong>, as all the data collected on each company was done at a single point in time and not over a period of time. My explanatory interest is the rating of the company on Glassdoor, which is found in 0.1 increments from 1 to 5. My main outcome variable of interest is the maximum salary the company has listed for its software development role in USD, which is labeled as <em>max_salary</em> in the dataset. I also conducted analysis on the variable of minimum salary, which is labeled as <em>min_salary</em> in the dataset.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span></code></pre>
-</div>
+
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>salary_rating</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/web_dev.csv"</span><span class='op'>)</span></span>
-<span><span class='va'>salary_rating</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>salary_rating_general</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span><span class='st'>"data/web_dev.csv"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>salary_rating</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>salary_rating_general</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code># A tibble: 900 × 11
-    ...1            id job_title      job_role job_location easy_apply
-   &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;        &lt;lgl&gt;     
- 1     1 1008079793339 Software Deve… Web App… Wilton, CT   TRUE      
- 2     2 1007607350396 Software Deve… Softwar… Remote       TRUE      
- 3     3 1008062785194 Software Deve… Softwar… Lexington, … TRUE      
- 4     4 1007190807289 Software Deve… Full St… Albany, NY   TRUE      
- 5     5 1007961472868 Software Deve… Full St… Kernersvill… TRUE      
- 6     6 1007923843916 Software Deve… Full St… Duluth, GA   TRUE      
- 7     7 1008062673549 Software Deve… PHP Ful… Oklahoma Ci… TRUE      
- 8     8 1008086199196 Software Deve… Web Des… Omaha, NE    TRUE      
- 9     9 1008091512712 Software Deve… Senior … Remote       TRUE      
-10    10 1008078902333 Software Deve… Web App… Columbia, MO TRUE      
-# ℹ 890 more rows
-# ℹ 5 more variables: company_name &lt;chr&gt;, salary &lt;chr&gt;,
-#   company_rating &lt;dbl&gt;, min_salary &lt;dbl&gt;, max_salary &lt;dbl&gt;</code></pre>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>salary_rating</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>salary_rating</span><span class='op'>)</span></span>
-<span><span class='va'>salary_rating</span></span></code></pre>
-</div>
-<pre><code># A tibble: 612 × 11
-    ...1            id job_title      job_role job_location easy_apply
-   &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;        &lt;lgl&gt;     
- 1     1 1008079793339 Software Deve… Web App… Wilton, CT   TRUE      
- 2     2 1007607350396 Software Deve… Softwar… Remote       TRUE      
- 3     3 1008062785194 Software Deve… Softwar… Lexington, … TRUE      
- 4     4 1007190807289 Software Deve… Full St… Albany, NY   TRUE      
- 5     5 1007961472868 Software Deve… Full St… Kernersvill… TRUE      
- 6     6 1007923843916 Software Deve… Full St… Duluth, GA   TRUE      
- 7     7 1008062673549 Software Deve… PHP Ful… Oklahoma Ci… TRUE      
- 8     8 1008086199196 Software Deve… Web Des… Omaha, NE    TRUE      
- 9     9 1008091512712 Software Deve… Senior … Remote       TRUE      
-10    10 1008078902333 Software Deve… Web App… Columbia, MO TRUE      
-# ℹ 602 more rows
-# ℹ 5 more variables: company_name &lt;chr&gt;, salary &lt;chr&gt;,
-#   company_rating &lt;dbl&gt;, min_salary &lt;dbl&gt;, max_salary &lt;dbl&gt;</code></pre>
 </div>
 <h2 id="histogram">Histogram</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>webdev_salary</span> <span class='op'>&lt;-</span> <span class='va'>salary_rating</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>max_salary</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>color<span class='op'>=</span><span class='st'>"coral2"</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Distribution of Maxium Salary of Software Developers in 612 Companies"</span> , </span>
+<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>max_salary</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_histogram</span><span class='op'>(</span>color<span class='op'>=</span><span class='st'>"coral2"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Distribution of Maxium Salary of Software Developers in 612 Companies"</span>, </span>
 <span>       x <span class='op'>=</span> <span class='st'>"Maximum Salary for Software Developer"</span>, </span>
 <span>       y <span class='op'>=</span> <span class='st'>"Count"</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>webdev_salary</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>webdev_salary</span> <span class='op'>+</span> <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
-<p>The majority of maximum salaries across the 612 companies appears to fall between <em>75,000 USD to 125,000 USD</em>.</p>
+<p>The majority of maximum salaries across the 612 companies appears to fall between <em>85,000 USD to 125,000 USD</em>.</p>
 <h1 id="results">Results</h1>
 <h2 id="scatterplot-visualization-of-maximum-salary">Scatterplot Visualization of Maximum Salary</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>maxsalary_plot</span> <span class='op'>&lt;-</span> <span class='va'>salary_rating</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>company_rating</span>,</span>
+<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>company_rating</span>,</span>
 <span>                     y <span class='op'>=</span> <span class='va'>max_salary</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"coral2"</span>, alpha <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Relationship Between Company Rating and Maximum Salary"</span>, </span>
+<span>  <span class='fu'>geom_point</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"coral2"</span>, alpha <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Relationship Between Company Rating and Maximum Salary"</span>, </span>
 <span>       x <span class='op'>=</span> <span class='st'>"Company Rating"</span>, </span>
 <span>       y <span class='op'>=</span> <span class='st'>"Maximum Salary for Software Developer"</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>maxsalary_plot</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>maxsalary_plot</span> <span class='op'>+</span> <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
-<p>From this scatterplot and the smooth line, we see that there is a slightly <strong>negative correlation</strong> between the rating of a company on Glassdoor and the maximum salary that they pay for their standard web development job. Thus, having a higher company rating tends to correlate with companies having a lower maximum salary, <strong>disproving my hypothesis</strong>.</p>
-<p>A reason for this could be because larger, well-known companies tend to have higher ratings, and due to their well-establish name they do not need to offer high salaries to retain employees. In addition, companies may receive higher ratings because they provide better benefits, resources, and/or support for their employees. Therefore, much of the monetary cost per employee goes into these benefits, and thus could be deducted from the salary.</p>
+<p>From this scatterplot visualization, there seems to be a slightly <strong>negative correlation</strong> between the rating of a company on Glassdoor and the maximum salary that they pay for their standard web development job. Regressions are conducted below to further examine this relationship.</p>
 <h2 id="scatterplot-visualization-of-minimum-salary">Scatterplot Visualization of Minimum Salary</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>minsalary_plot</span> <span class='op'>&lt;-</span> <span class='va'>salary_rating</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>company_rating</span>,</span>
+<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>company_rating</span>,</span>
 <span>                     y <span class='op'>=</span> <span class='va'>min_salary</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"green4"</span>, alpha <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Relationship Between Company Rating and Minimum Salary"</span>, </span>
+<span>  <span class='fu'>geom_point</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"green4"</span>, alpha <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>geom_smooth</span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Relationship Between Company Rating and Minimum Salary"</span>, </span>
 <span>       x <span class='op'>=</span> <span class='st'>"Company Rating"</span>, </span>
 <span>       y <span class='op'>=</span> <span class='st'>"Minimum Salary for Software Developer"</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>minsalary_plot</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>minsalary_plot</span> <span class='op'>+</span> <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
 </div>
-<p>Out of curiosity, I also examined the relationship between the company rating and the minimum salary for software developer. Although the linear line has a slightly negative slope, it is <strong>almost horizontal</strong>. Therefore, the rating of a company on Glassdoor has almost no impact on the minimum salary. Note that this means that company rating has more of a impact on the maximum salary of a software developer than the minimum salary.</p>
-<p>The reason for this could that there exists a standard minimum salary for software developers that companies try to meet regardless of other factors. Additionally, companies are unrestricted in how high the salaries they pay can go, but they cannot offer salaries too low as it is unethical and would hurt their reputation. Having a minimum salary that is lower than a potential set standard could also drive away potential employees, which incentivizes companies to price their minimum salary at a standard range regardless of their rating.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>I also examined the relationship between the company rating and the minimum salary for software developers, shown in the scatterplot visualization above. Although the linear line has a slightly negative slope, it is <strong>more horizontal</strong> than the line regarding maximum salary. Regressions are conducted below to further examine this relationship.</p>
+<h2 id="primary-variable-regression">Primary Variable Regression</h2>
+<h3 id="maximum-salary-regression">Maximum Salary Regression</h3>
+<p>The following regression analyzes the relationship between a company’s rating on Glassdoor and the maximum salary that company pays their software developers.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>maxsalary_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>max_salary</span> <span class='op'>~</span> <span class='va'>company_rating</span>, data <span class='op'>=</span> <span class='va'>salary_rating</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>maxvar_labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span>  <span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
+<span>  <span class='st'>"company_rating"</span> <span class='op'>=</span> <span class='st'>"Company Rating"</span><span class='op'>)</span> </span>
+<span></span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Regression <span class='op'>=</span> <span class='va'>maxsalary_model</span><span class='op'>)</span>,</span>
+<span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
+<span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
+<span>                           coef_map <span class='op'>=</span> <span class='va'>maxvar_labels</span>,</span>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>,</span>
+<span>                                       <span class='st'>"adj.r.squared"</span><span class='op'>)</span>, fmt <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
+</div>
+<div id="adpxcpabsu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#adpxcpabsu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#adpxcpabsu thead, #adpxcpabsu tbody, #adpxcpabsu tfoot, #adpxcpabsu tr, #adpxcpabsu td, #adpxcpabsu th {
+  border-style: none;
+}
+
+#adpxcpabsu p {
+  margin: 0;
+  padding: 0;
+}
+
+#adpxcpabsu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#adpxcpabsu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#adpxcpabsu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#adpxcpabsu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#adpxcpabsu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#adpxcpabsu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#adpxcpabsu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#adpxcpabsu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#adpxcpabsu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#adpxcpabsu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#adpxcpabsu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#adpxcpabsu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#adpxcpabsu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#adpxcpabsu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#adpxcpabsu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#adpxcpabsu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#adpxcpabsu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#adpxcpabsu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#adpxcpabsu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#adpxcpabsu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#adpxcpabsu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#adpxcpabsu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#adpxcpabsu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#adpxcpabsu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#adpxcpabsu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#adpxcpabsu .gt_left {
+  text-align: left;
+}
+
+#adpxcpabsu .gt_center {
+  text-align: center;
+}
+
+#adpxcpabsu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#adpxcpabsu .gt_font_normal {
+  font-weight: normal;
+}
+
+#adpxcpabsu .gt_font_bold {
+  font-weight: bold;
+}
+
+#adpxcpabsu .gt_font_italic {
+  font-style: italic;
+}
+
+#adpxcpabsu .gt_super {
+  font-size: 65%;
+}
+
+#adpxcpabsu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#adpxcpabsu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#adpxcpabsu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#adpxcpabsu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#adpxcpabsu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#adpxcpabsu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#adpxcpabsu .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Regression">Regression</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="" class="gt_row gt_left">Intercept</td>
+<td headers="Regression" class="gt_row gt_center">118964.81</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 6341.40</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = &lt;0.01</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Company Rating</td>
+<td headers="Regression" class="gt_row gt_center">-5559.40</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 1632.12</td></tr>
+    <tr><td headers="" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Regression" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">p = &lt;0.01</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Num.Obs.</td>
+<td headers="Regression" class="gt_row gt_center">612</td></tr>
+    <tr><td headers="" class="gt_row gt_left">R2</td>
+<td headers="Regression" class="gt_row gt_center">0.019</td></tr>
+    <tr><td headers="" class="gt_row gt_left">R2 Adj.</td>
+<td headers="Regression" class="gt_row gt_center">0.017</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<p>The regression conducted shows that on average, an increase of one on company rating (out of a scale of 1-5) is associated with a <strong>$5559.40 decrease</strong> in the maximum salary paid to software developers in the company. This indicates that, having a higher company rating appears to correlate with companies having a slightly lower maximum salary, which would <strong>disproving my hypothesis</strong>.</p>
+<p>A reason for this could be because larger, well-known companies tend to have higher ratings, and due to their well-established name, they may not need to offer high salaries to retain employees. In addition, companies may receive higher ratings because they provide better benefits, resources, and/or support for their employees. Therefore, much of the monetary cost per employee goes into these benefits, and thus could be deducted from the salary. It could also be the case that companies offering higher benefits or some other variable get higher scores regardless of the salary they pay, and thus that employees care more about benefits or other variables than they do about salary.</p>
+<p>For this study, our intercept does not provide substantial information, as it indicates the change in software developer salary when a company has a rating of 0, but a rating of 0 is highly unlikely, if not impossible, on Glassdoor. The p-value of our primary variable of interest is &lt; 0.01. Therefore, our estimated coefficient appears to <strong>statistically significant</strong> at both the alpha = 0.05 and the alpha = 0.01 levels. However, I believe that the coefficient does <strong>not represent a causal effect</strong>, as there are too many confounders that impact this study. Some examples include company benefits, provided healthcare, location, etc… which would impact company rating and could impact salary of software developers, but are not considered. Additionally, there is large variation between the companies in this dataset, such as industry and company size, which are also factors that could impact company rating and software developer salaries. Therefore, we cannot currently conclude that an increase of one on company rating <em>causes</em> a $5559.40 decrease in software developer salary.</p>
+<h3 id="minimum-salary-regression">Minimum Salary Regression</h3>
+<p>The following regression analyzes the relationship between a company’s rating on Glassdoor and the minimum salary that company pays their software developers.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>minsalary_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>min_salary</span> <span class='op'>~</span> <span class='va'>company_rating</span>, data <span class='op'>=</span> <span class='va'>salary_rating</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>minvar_labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span>  <span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
+<span>  <span class='st'>"company_rating"</span> <span class='op'>=</span> <span class='st'>"Company Rating"</span><span class='op'>)</span> </span>
+<span></span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Regression <span class='op'>=</span> <span class='va'>minsalary_model</span><span class='op'>)</span>,</span>
+<span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
+<span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
+<span>                           coef_map <span class='op'>=</span> <span class='va'>minvar_labels</span>,</span>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>,</span>
+<span>                                       <span class='st'>"adj.r.squared"</span><span class='op'>)</span>, fmt <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
+</div>
+<div id="vbxxymvqpd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vbxxymvqpd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vbxxymvqpd thead, #vbxxymvqpd tbody, #vbxxymvqpd tfoot, #vbxxymvqpd tr, #vbxxymvqpd td, #vbxxymvqpd th {
+  border-style: none;
+}
+
+#vbxxymvqpd p {
+  margin: 0;
+  padding: 0;
+}
+
+#vbxxymvqpd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vbxxymvqpd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vbxxymvqpd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vbxxymvqpd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vbxxymvqpd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vbxxymvqpd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vbxxymvqpd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vbxxymvqpd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vbxxymvqpd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vbxxymvqpd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vbxxymvqpd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vbxxymvqpd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vbxxymvqpd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vbxxymvqpd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vbxxymvqpd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vbxxymvqpd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vbxxymvqpd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vbxxymvqpd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vbxxymvqpd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vbxxymvqpd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vbxxymvqpd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vbxxymvqpd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vbxxymvqpd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vbxxymvqpd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vbxxymvqpd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vbxxymvqpd .gt_left {
+  text-align: left;
+}
+
+#vbxxymvqpd .gt_center {
+  text-align: center;
+}
+
+#vbxxymvqpd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vbxxymvqpd .gt_font_normal {
+  font-weight: normal;
+}
+
+#vbxxymvqpd .gt_font_bold {
+  font-weight: bold;
+}
+
+#vbxxymvqpd .gt_font_italic {
+  font-style: italic;
+}
+
+#vbxxymvqpd .gt_super {
+  font-size: 65%;
+}
+
+#vbxxymvqpd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vbxxymvqpd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vbxxymvqpd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vbxxymvqpd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vbxxymvqpd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vbxxymvqpd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vbxxymvqpd .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Regression">Regression</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="" class="gt_row gt_left">Intercept</td>
+<td headers="Regression" class="gt_row gt_center">77495.44</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 5183.79</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = &lt;0.01</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Company Rating</td>
+<td headers="Regression" class="gt_row gt_center">-690.93</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 1334.18</td></tr>
+    <tr><td headers="" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Regression" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">p = 0.60</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Num.Obs.</td>
+<td headers="Regression" class="gt_row gt_center">612</td></tr>
+    <tr><td headers="" class="gt_row gt_left">R2</td>
+<td headers="Regression" class="gt_row gt_center">0.000</td></tr>
+    <tr><td headers="" class="gt_row gt_left">R2 Adj.</td>
+<td headers="Regression" class="gt_row gt_center">-0.001</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<p>This regression shows that on average, an increase of one on company rating is associated with a $690.93 decrease in the minimum salary paid. However, a difference of 690 USD in annual salary for software developers who average around 100,000 USD per year makes very little difference, and can almost be regarded as negligible. This can be compared with what is shown visually from our scatterplot of minimum salary above, which appears to be almost horizontal, despite having a slope of around –690.</p>
+<p>The reason for this could be that there exists a standard minimum salary for software developers that companies try to meet regardless of other factors. Additionally, companies are unrestricted in how high the salaries they pay can go, but they cannot offer salaries too low as it is unethical and would hurt their reputation. Having a minimum salary that is lower than a potential set standard could also drive away potential employees, which would incentivize companies to price their minimum salary at a standard range regardless of their rating.</p>
+<p>As stated previously, our intercept does not provide important information. The p-value for minimum salary is 0.60. Therefore, as 0.60 is larger than 0.05, at an alpha level of 0.05, our estimated coefficient for minimum salary appears to <strong>not be statistically significant</strong>. This, combined with the additional confounding factors impacting this study, causes me to believe that the coefficient does <strong>not represent a causal effect</strong>.</p>
+<h2 id="multiple-variable-regression">Multiple Variable Regression</h2>
+<p>The regression below is conducted to include maximum salary and the specific job title, as title may be a possible confounding variable. Not only could the exact job title impact the salary being paid, but different role distributions at companies can also affect their rating.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>multivar_model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>max_salary</span> <span class='op'>~</span> <span class='va'>company_rating</span> <span class='op'>+</span> <span class='va'>job_title</span>, data <span class='op'>=</span> <span class='va'>salary_rating</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>multivar_labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span>  <span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
+<span>  <span class='st'>"company_rating"</span> <span class='op'>=</span> <span class='st'>"Company Rating"</span>, </span>
+<span>  <span class='st'>"job_titleBack End Engineer"</span> <span class='op'>=</span> <span class='st'>"Back End Engineer"</span>,</span>
+<span>  <span class='st'>"job_titleFront End Engineer"</span> <span class='op'>=</span> <span class='st'>"Front End Engineer"</span>, </span>
+<span>  <span class='st'>"job_titleFull Stack Engineer"</span> <span class='op'>=</span> <span class='st'>"Full Stack Engineer"</span>, </span>
+<span>  <span class='st'>"job_titleJunior Web Developer"</span> <span class='op'>=</span> <span class='st'>"Junior Web Developer"</span>,</span>
+<span>  <span class='st'>"job_titleMobile Engineer"</span> <span class='op'>=</span> <span class='st'>"Mobile Engineer"</span>, </span>
+<span>  <span class='st'>"job_titleSenior IT Specialist"</span> <span class='op'>=</span> <span class='st'>"Senior IT Specialist"</span>, </span>
+<span>  <span class='st'>"job_titleSenior Web Developer"</span> <span class='op'>=</span> <span class='st'>"Senior Web Developer"</span>,</span>
+<span>  <span class='st'>"job_titleSoftware Developer"</span> <span class='op'>=</span> <span class='st'>"Software Developer"</span>,</span>
+<span>  <span class='st'>"job_titleWeb Designer"</span> <span class='op'>=</span> <span class='st'>"Web Designer"</span>,</span>
+<span>  <span class='st'>"job_titleWeb Developer"</span> <span class='op'>=</span> <span class='st'>"Web Developer"</span><span class='op'>)</span> </span>
+<span></span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Regression <span class='op'>=</span> <span class='va'>multivar_model</span><span class='op'>)</span>,</span>
+<span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
+<span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
+<span>                           coef_map <span class='op'>=</span> <span class='va'>multivar_labels</span>,</span>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>,</span>
+<span>                                       <span class='st'>"adj.r.squared"</span><span class='op'>)</span>, fmt <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
+</div>
+<div id="iarufzudiu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iarufzudiu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#iarufzudiu thead, #iarufzudiu tbody, #iarufzudiu tfoot, #iarufzudiu tr, #iarufzudiu td, #iarufzudiu th {
+  border-style: none;
+}
+
+#iarufzudiu p {
+  margin: 0;
+  padding: 0;
+}
+
+#iarufzudiu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#iarufzudiu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#iarufzudiu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#iarufzudiu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#iarufzudiu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#iarufzudiu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#iarufzudiu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#iarufzudiu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#iarufzudiu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#iarufzudiu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#iarufzudiu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#iarufzudiu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#iarufzudiu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#iarufzudiu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#iarufzudiu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iarufzudiu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#iarufzudiu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#iarufzudiu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#iarufzudiu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iarufzudiu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#iarufzudiu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iarufzudiu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#iarufzudiu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iarufzudiu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iarufzudiu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iarufzudiu .gt_left {
+  text-align: left;
+}
+
+#iarufzudiu .gt_center {
+  text-align: center;
+}
+
+#iarufzudiu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#iarufzudiu .gt_font_normal {
+  font-weight: normal;
+}
+
+#iarufzudiu .gt_font_bold {
+  font-weight: bold;
+}
+
+#iarufzudiu .gt_font_italic {
+  font-style: italic;
+}
+
+#iarufzudiu .gt_super {
+  font-size: 65%;
+}
+
+#iarufzudiu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#iarufzudiu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#iarufzudiu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#iarufzudiu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#iarufzudiu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#iarufzudiu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#iarufzudiu .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Regression">Regression</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="" class="gt_row gt_left">Intercept</td>
+<td headers="Regression" class="gt_row gt_center">118646.94</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 6821.74</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = &lt;0.01</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Company Rating</td>
+<td headers="Regression" class="gt_row gt_center">-5101.12</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 1599.79</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = &lt;0.01</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Back End Engineer</td>
+<td headers="Regression" class="gt_row gt_center">9249.84</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 6461.96</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = 0.15</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Front End Engineer</td>
+<td headers="Regression" class="gt_row gt_center">-12349.03</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 4244.62</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = &lt;0.01</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Full Stack Engineer</td>
+<td headers="Regression" class="gt_row gt_center">5672.24</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 4569.25</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = 0.21</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Junior Web Developer</td>
+<td headers="Regression" class="gt_row gt_center">6894.47</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 5108.59</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = 0.18</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Mobile Engineer</td>
+<td headers="Regression" class="gt_row gt_center">-13376.28</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 6723.94</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = 0.05</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Senior IT Specialist</td>
+<td headers="Regression" class="gt_row gt_center">7838.17</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 6352.71</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = 0.22</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Senior Web Developer</td>
+<td headers="Regression" class="gt_row gt_center">-101.89</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 4267.12</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = 0.98</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Software Developer</td>
+<td headers="Regression" class="gt_row gt_center">-9144.16</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 6351.13</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = 0.15</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Web Designer</td>
+<td headers="Regression" class="gt_row gt_center">4539.10</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 6461.84</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">p = 0.48</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Web Developer</td>
+<td headers="Regression" class="gt_row gt_center">-2696.87</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Regression" class="gt_row gt_center">s.e. = 3795.96</td></tr>
+    <tr><td headers="" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Regression" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">p = 0.48</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Num.Obs.</td>
+<td headers="Regression" class="gt_row gt_center">612</td></tr>
+    <tr><td headers="" class="gt_row gt_left">R2</td>
+<td headers="Regression" class="gt_row gt_center">0.079</td></tr>
+    <tr><td headers="" class="gt_row gt_left">R2 Adj.</td>
+<td headers="Regression" class="gt_row gt_center">0.062</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<p>Our baseline in this regression in job title is the Applications Engineer. Therefore, each of the coefficients display the average difference in maximum salary between individuals with that respective job title and Applications Engineers, holding all other factors constant. The only estimated coefficients with p-value less than 0.05 were for the job titles of <strong>Front End Engineer (p-value = &lt;0.01)</strong> and <strong>Mobile Engineer (p-value = 0.05)</strong>, and therefore only for those titles are the estimated coefficients statistically significant. There is still not enough information to establish a causal relationship, as there are many additional confounding factors that could impact both the company’s rating and the maximum salary they pay, such as their size and provided benefits.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>The purpose of my study was to examine the potential relationship between company rating and maximum salary paid to software developers. Through this study, I examined relationships with maximum salary, minimum salary, and for each specific job title. To conclude, it appears that an increase in company rating leads to a <strong>slight decrease in maximum salary</strong> paid overall, and leads to a negligible difference in minimum salary paid. This disproves my hypothesis. However, there is fluctuation on the difference to maximum salary between each specific job title within software development. The estimated coefficient for maximum salary was statistically significant at an alpha level of 0.05 in the singular regression and for 2 job titles in the multivariable regression.</p>
+<p>There are few limitations to study. Firstly, although Glassdoor is one of the largest and most credible job/recruiting websites, some company ratings on the website still may not be completely representative of that company’s actual reputation. Additionally, data is not given in Glassdoor on the number of people that rated each given company, which may have influence on the rating of the company. There are also a few confounding factors that were not considered in this study due to lack of data, as how a company is rated depends on a variety of factors. These factors include the size of the company, diversity and inclusion at the company, physical office space, environmental impact, etc… Most notably, no insight is given on financial benefits (e.g. paid healthcare, paid time off, etc…) that each company provides. This information is crucial as it may cause displayed salaries to not be completely accurate, and could provide invaluable insight on what exactly drives company ratings.</p>
+<p>To improve this analysis in the future, I would try to collect more comprehensive data about each company beyond just Glassdoor ratings to better understand their reputation and properly analyze confounding factors. Investigating the ratings of the companies on another large job/recruiting website may also lead to more accurate depictions of the company reputation. It may also be informative to examine the research question of this study for more technology roles, such as for data scientists or graphic designers. Then, it could be insightful to expand to roles outside of technology. For example, we could examine if the trend of this study holds true for consultants? Cashiers? Secretaries and assistants? Combining these analyses could help us observe the <em>overall</em> correlation between company ratings and financial compensation, and/or discrepancies within the technology industry.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
